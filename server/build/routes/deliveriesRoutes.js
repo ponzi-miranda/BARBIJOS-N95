@@ -12,6 +12,9 @@ class DeliveriesRoutes {
     }
     config() {
         this.router.get("/services", deliveriesController_1.default.getServices);
+        this.router.get("/deliveries", deliveriesController_1.default.getDeliveries);
+        this.router.get("/deliveries/:dni", deliveriesController_1.default.getDeliverybyDni);
+        this.router.post("/deliveries", deliveriesController_1.default.createDelivery);
     }
 }
 exports.default = new DeliveriesRoutes().router;
