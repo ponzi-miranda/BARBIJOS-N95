@@ -15,6 +15,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE DATABASE n95database;
+
 --
 -- Table structure for table `entregas`
 --
@@ -23,7 +25,7 @@ DROP TABLE IF EXISTS `entregas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `entregas` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `idPersona` int DEFAULT NULL,
   `fechaRetiro` datetime DEFAULT NULL,
@@ -50,7 +52,7 @@ DROP TABLE IF EXISTS `personas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personas` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(65) DEFAULT NULL,
   `dni` int DEFAULT NULL,
   `idServicio` int DEFAULT NULL,
@@ -124,7 +126,7 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(55) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
