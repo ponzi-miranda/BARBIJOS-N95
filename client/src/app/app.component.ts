@@ -7,10 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client';
-  colorAuto = 'red';
-  listEntregas = [ 'entrega1', 'entrega2']
 
-  private calcularNumero() {
-
-  }
+  
 }
