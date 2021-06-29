@@ -39,10 +39,10 @@ class DeliveriesController {
       const { dni } = req.query;
       const entregas = await pool.query('SELECT e.* FROM entregas e JOIN personas p ON e.idPersona = p.id WHERE p.dni = ?', [dni]);
       
-      if (!entregas[0]) {
-        return res.json({ message: 'No se encuentra registrado', isRegistered: false })
+      if (entregas.length == 0) {
+        return res.json({ message: 'No existen registros', isRegistered: false })
       } else {
-        return res.json({ message: 'Successful', isRegistered: true, data: entregas[0] })
+        return res.json({ message: 'Successful', isRegistered: true, data: entregas })
       }
     } catch (error) {
       res.status(404).json({ message: 'Failed', code: 404 });
