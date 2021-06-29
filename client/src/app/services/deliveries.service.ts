@@ -6,25 +6,24 @@ import { delivery } from '../models/delivery';
   providedIn: 'root'
 })
 export class DeliveriesService {
-
-  API_URI = `http://localhost:3000/api`;
+  API_URI = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
   getDeliveries(){
-    return this.http.get(`${this.API_URI}/deliveries`); 
+    return this.http.get(`${this.API_URI}/api/deliveries`); 
   }
 
   getListDeliveriesByDni(dni: string) {
-    return this.http.get(`${this.API_URI}/deliveries/?dni=${dni}`);
+    const params = { dni: dni };
+    return this.http.get(`${this.API_URI}/api/deliveries/search`, { params });
   }
 
   deleteDelivey(id: string){
-    return this.http.delete(`${this.API_URI}/deliveries/?id=${id}`); 
+    return this.http.delete(`${this.API_URI}/api/deliveries/?id=${id}`); 
   }
 
   createDelivery(delivery : delivery){
-    return this.http.post(`${this.API_URI}/deliveries`, delivery); 
+    return this.http.post(`${this.API_URI}/api/deliveries`, delivery); 
   }
-
 }

@@ -13,7 +13,7 @@ import { DeliveriesService } from './services/deliveries.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
 import { DeliveriesListPage } from './pages/deliveries-list/deliveries-list.page';
-
+import { NewDeliveryFormComponent } from './components/new-delivery-form/new-delivery-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,8 @@ import { DeliveriesListPage } from './pages/deliveries-list/deliveries-list.page
     MenuComponent,
     MainPage,
     DeliveriesListComponent,
-    DeliveriesListPage
+    DeliveriesListPage,
+    NewDeliveryFormComponent
   ],
   imports: [
     BrowserModule,
