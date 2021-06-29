@@ -26,7 +26,7 @@ class DeliveriesController {
   //GET - Todas las entregas
   public async getDeliveries(req: Request, res: Response): Promise<any> {
     try {
-      const deliveries = await pool.query("SELECT * FROM entregas");
+      const deliveries = await pool.query("SELECT e.id, p.nombre, s.nombre AS servicio, r.nombre AS rol, e.fechaRetiro FROM entregas e JOIN personas p ON e.idPersona = p.id JOIN servicios s ON s.id = e.idServicio JOIN roles r ON r.id = p.idRol;");
       return res.json({ message: 'Successful', data: deliveries });
     } catch (error) {
       res.status(404).json({ message: 'Failed', code: 404 });
@@ -37,7 +37,7 @@ class DeliveriesController {
   public async getDeliveryByDni(req: Request, res: Response): Promise<any> {
     try {
       const { dni } = req.query;
-      const entregas = await pool.query('SELECT e.* FROM entregas e JOIN personas p ON e.idPersona = p.id WHERE p.dni = ?', [dni]);
+      const entregas = await pool.query('SELECT e.id, s.nombre AS servicio, e.fechaRetiro FROM entregas e JOIN personas p ON e.idPersona = p.id JOIN servicios s ON s.id = e.idServicio WHERE p.dni = ?', [dni]);
       
       if (entregas.length == 0) {
         return res.json({ message: 'No existen registros', isRegistered: false })
