@@ -6,17 +6,15 @@ class DeliveriesController {
 
   //GET SERVICIOS
   public async getServices(req: Request, res: Response): Promise<void> {
-    const roles = await pool.query("SELECT * FROM roles");
+    const roles = await pool.query("SELECT * FROM servicios");
     res.json(roles);
   }
 
   //GET ROLES
   public async getRoles(req: Request, res: Response): Promise<void> {
-    const services = await pool.query("SELECT * FROM servicios");
+    const services = await pool.query("SELECT * FROM roles");
     res.json(services);
   }
-
-
 
   //GET ENTREGAS
 
