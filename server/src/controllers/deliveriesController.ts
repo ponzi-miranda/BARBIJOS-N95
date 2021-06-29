@@ -3,47 +3,79 @@ import pool from "../database";
 
 // Controlador de Entregas
 class DeliveriesController {
-
-  //GET SERVICIOS
-  public async getServices(req: Request, res: Response): Promise<void> {
-    const roles = await pool.query("SELECT * FROM servicios");
-    res.json(roles);
+  //GET - Servicios
+  public async getServices(req: Request, res: Response): Promise<any> {
+    try {
+      const services = await pool.query("SELECT * FROM servicios");
+      return res.json({ message: 'Successful', data: services });
+    } catch (error) {
+      res.status(404).json({ message: 'Failed', code: 404 });
+    }
   }
 
-  //GET ROLES
-  public async getRoles(req: Request, res: Response): Promise<void> {
-    const services = await pool.query("SELECT * FROM roles");
-    res.json(services);
+  //GET - Roles
+  public async getRoles(req: Request, res: Response): Promise<any> {
+    try {
+      const roles = await pool.query("SELECT * FROM roles");
+      return res.json({ message: 'Successful', data: roles });
+    } catch (error) {
+      res.status(404).json({ message: 'Failed', code: 404 });
+    }
   }
 
-  //GET ENTREGAS
-
-  public async getDeliveries(req: Request, res: Response): Promise<void> {
-    const deliveries = await pool.query("SELECT * FROM entregas");
-    res.json(deliveries);
+  //GET - Todas las entregas
+  public async getDeliveries(req: Request, res: Response): Promise<any> {
+    try {
+      const deliveries = await pool.query("SELECT * FROM entregas");
+      return res.json({ message: 'Successful', data: deliveries });
+    } catch (error) {
+      res.status(404).json({ message: 'Failed', code: 404 });
+    }
   }
 
-  //GET ENTREGAS BY DNI
-
-  public async getDeliverybyDni(req: Request, res: Response): Promise<any> {
-      const { id } = req.params;
-      const entregas = await pool.query("SELECT * FROM entregas WHERE id = ?", [id]);
-      if (entregas.length > 0){
-        return res.json(entregas[0]);
+  //GET - Buscar entregas por dni
+  public async getDeliveryByDni(req: Request, res: Response): Promise<any> {
+    try {
+      const { dni } = req.query;
+      const entregas = await pool.query('SELECT e.* FROM entregas e JOIN personas p ON e.idPersona = p.id WHERE p.dni = ?', [dni]);
+      
+      if (!entregas[0]) {
+        return res.json({ message: 'No se encuentra registrado', isRegistered: false })
+      } else {
+        return res.json({ message: 'Successful', isRegistered: true, data: entregas[0] })
       }
-      res.status(404).json({text: 'Entrega no encontrada'});
-  }
-  //POST ENTREGA
-  public async createDelivery (req: Request, res: Response): Promise<void> {
-    await pool.query("INSERT INTO entregas set?", [req.body]);
-    res.json({message: "Creando entrega"});
+    } catch (error) {
+      res.status(404).json({ message: 'Failed', code: 404 });
+    }
   }
 
-  //DELETE ENTREGA
-  public async delete(req: Request, res: Response): Promise<void> {
-    const { id } = req.params;
-    await pool.query("DELETE FROM entregas WHERE id = ?", [id]);
-    res.json({message: "Entrega eliminada" });
+  // POST - Nueva Entrega
+  public async createDelivery(req: Request, res: Response): Promise<any> {
+    try {
+      if (req.body) {
+        await pool.query("INSERT INTO entregas set?", [req.body]);
+        return res.json({ message: 'Delivery Created!' });
+      } else {
+        return res.json({ message: 'Parametros o syntax invalidos' });
+      }
+    } catch (error) {
+      res.status(404).json({ message: 'Failed', code: 404 });
+    }
+  }
+
+  //DELETE - Entrega
+  public async delete(req: Request, res: Response): Promise<any> {
+    try {
+      const { id } = req.params;
+      if (id) {
+        await pool.query("DELETE FROM entregas WHERE id = ?", [id]);
+        return res.json({ message: "Delivery deleted!" });
+      } else {
+        return res.json({ message: 'Parametros o syntax invalidos' });
+      }
+    } catch (error) {
+      res.status(404).json({ message: 'Failed', code: 404 });
+    }
   }
 }
 

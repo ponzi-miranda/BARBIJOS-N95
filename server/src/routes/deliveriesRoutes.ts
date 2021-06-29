@@ -10,10 +10,10 @@ class DeliveriesRoutes {
 
   config() {
     this.router.get("/services", deliveriesController.getServices);
-    this.router.get("/deliveries", deliveriesController.getDeliveries);
-    this.router.get("/deliveries/:dni", deliveriesController.getDeliverybyDni);
-    this.router.post("/deliveries", deliveriesController.createDelivery);
-    this.router.delete("/deliveries", deliveriesController.delete);
+    this.router.get("/", deliveriesController.getDeliveries);
+    this.router.get("/search", deliveriesController.getDeliveryByDni);
+    this.router.post("/", deliveriesController.createDelivery);
+    this.router.delete("/", deliveriesController.delete);
   }
 }
 
