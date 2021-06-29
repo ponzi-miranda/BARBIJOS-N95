@@ -29,9 +29,10 @@ export class SearchComponent implements OnInit {
     this.deliveriesService.getListDeliveriesByDni(values.dni).subscribe(
       (response) => {
 
-        if (!response) {
+        // if (!response) {
           
-        }
+        // }
+        console.log(response);
         this.deliveriesList = response;
       },
       (error) => {
