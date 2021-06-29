@@ -11,6 +11,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MainPage } from './pages/main/main.page';
 import { DeliveriesService } from './services/deliveries.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
+import { DeliveriesListPage } from './pages/deliveries-list/deliveries-list.page';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     SearchComponent,
     NewDeliveryPage,
     MenuComponent,
-    MainPage
+    MainPage,
+    DeliveriesListComponent,
+    DeliveriesListPage
   ],
   imports: [
     BrowserModule,
