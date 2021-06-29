@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { delivery } from '../models/delivery';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +15,11 @@ export class DeliveriesService {
   getDeliveries(){
     return this.http.get(`${this.API_URI}/deliveries`); 
   }
+
+
+  // obtenerPosts():Observable<Post[]>{
+  //   return this.http.get(this.URL_API);
+  // }
 
   getListDeliveriesByDni(dni: string) {
     return this.http.get(`${this.API_URI}/deliveries/?dni=${dni}`);
