@@ -42,7 +42,11 @@ class DeliveriesController {
       if (entregas.length == 0) {
         return res.json({ message: 'No existen registros', isRegistered: false })
       } else {
-        return res.json({ message: 'Successful', isRegistered: true, data: entregas })
+        const person = await pool.query('SELECT * FROM personas WHERE dni = ?', [dni]);
+        if (!person) {
+          res.status(404).json({ message: 'Failed - Person not found', code: 404 });
+        }
+        return res.json({ message: 'Successful', isRegistered: true, data: entregas, personData: person })
       }
     } catch (error) {
       res.status(404).json({ message: 'Failed', code: 404 });
