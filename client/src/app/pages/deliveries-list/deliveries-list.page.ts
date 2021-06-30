@@ -13,7 +13,7 @@ export class DeliveriesListPage implements OnInit {
   @HostBinding('class') classes = 'row';
 
   deliveries: any = [];
-
+  services: any = [];
   constructor(private deliveriesService : DeliveriesService) { }
 
   ngOnInit(): void {
@@ -26,13 +26,6 @@ export class DeliveriesListPage implements OnInit {
           this.deliveries = res;
       },
       (error) => console.log(error)
-      
-      // getPostList() {
-      //   this.postService.obtenerPosts().subscribe(
-      //     res=>{this.posts=res; console.log('getPostList()', res);},
-      //     err=>console.log('Error', err));
-      // }
-
     );
   }
 
