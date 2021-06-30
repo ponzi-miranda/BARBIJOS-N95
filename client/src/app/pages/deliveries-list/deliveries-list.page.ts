@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { DeliveriesService } from '../../services/deliveries.service';
+import { delivery } from 'src/app/models/delivery';
+
 
 @Component({
   selector: 'app-deliveries-list',
@@ -8,12 +10,22 @@ import { DeliveriesService } from '../../services/deliveries.service';
 })
 export class DeliveriesListPage implements OnInit {
 
+  @HostBinding('class') classes = 'row';
+
+  deliveries: any = [];
+  services: any = [];
   constructor(private deliveriesService : DeliveriesService) { }
 
   ngOnInit(): void {
+    this.getDeliveries();
+  }
+
+  getDeliveries(){
     this.deliveriesService.getDeliveries().subscribe(
-      res => console.log(res),
-      err => console.error(err)
+      res => {
+          this.deliveries = res;
+      },
+      (error) => console.log(error)
     );
   }
 
