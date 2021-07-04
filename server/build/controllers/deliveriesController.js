@@ -29,7 +29,7 @@ class DeliveriesController {
     //GET - Todas las entregas
     async getDeliveries(req, res) {
         try {
-            const deliveries = await database_1.default.query("SELECT * FROM entregas");
+            const deliveries = await database_1.default.query("SELECT e.id, p.nombre, s.nombre AS servicio, r.nombre AS rol, e.fechaRetiro FROM entregas e JOIN personas p ON e.idPersona = p.id JOIN servicios s ON s.id = e.idServicio JOIN roles r ON r.id = p.idRol;");
             return res.json({ message: 'Successful', data: deliveries });
         }
         catch (error) {
@@ -40,7 +40,7 @@ class DeliveriesController {
     async getDeliveryByDni(req, res) {
         try {
             const { dni } = req.query;
-            const entregas = await database_1.default.query('SELECT e.* FROM entregas e JOIN personas p ON e.idPersona = p.id WHERE p.dni = ?', [dni]);
+            const entregas = await database_1.default.query('SELECT e.id, s.nombre AS servicio, e.fechaRetiro FROM entregas e JOIN personas p ON e.idPersona = p.id JOIN servicios s ON s.id = e.idServicio WHERE p.dni = ?', [dni]);
             if (entregas.length == 0) {
                 return res.json({ message: 'No existen registros', isRegistered: false });
             }
