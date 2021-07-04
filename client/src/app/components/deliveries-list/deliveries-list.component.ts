@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeliveriesService } from '../../services/deliveries.service';
 
 @Component({
-  selector: 'app-deliveries-list',
+  selector: 'deliveries-list-component',
   templateUrl: './deliveries-list.component.html',
   styleUrls: ['./deliveries-list.component.scss']
 })

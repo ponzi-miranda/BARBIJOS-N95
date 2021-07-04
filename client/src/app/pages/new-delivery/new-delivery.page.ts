@@ -1,18 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { DeliveriesService } from 'src/app/services/deliveries.service';
 
 @Component({
   selector: 'new-delivery',
   templateUrl: './new-delivery.page.html',
-  styleUrls: ['./new-delivery.page.scss']
+  styleUrls: ['./new-delivery.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewDeliveryPage implements OnInit {
+  showLastDeliveries: boolean;
+  showForm: boolean;
 
-  constructor() { }
+  constructor(
+    private deliveriesService: DeliveriesService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  searchResult() {
-    
+  onSearchResult(event) {
+    if (event.response) {
+      const response = event.response;
+      if (response.isRegistered) {
+        this.showLastDeliveries = true;
+      } else {
+        this.showForm = true;
+      }
+    }
   }
 }
