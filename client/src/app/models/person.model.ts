@@ -6,6 +6,5 @@ export class PersonData {
   rolId: number;
   serviceId: number;
   deliveredDate: Date;
-  time: Time;
   observations: string;
 }

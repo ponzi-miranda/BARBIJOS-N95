@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
-import { delivery } from '../models/delivery';
+import { Delivery } from '../models/delivery';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +24,15 @@ export class DeliveriesService {
     return this.http.delete(`${this.API_URI}/api/deliveries/?id=${id}`); 
   }
 
-  createDelivery(delivery : delivery){
+  createDelivery(delivery : Delivery){
     return this.http.post(`${this.API_URI}/api/deliveries`, delivery); 
+  }
+
+  getServices(): Observable<any> {
+    return this.http.get(`${this.API_URI}/api/deliveries/services`);
+  }
+
+  getRoles(): Observable<any> {
+    return this.http.get(`${this.API_URI}/api/deliveries/roles`);
   }
 }

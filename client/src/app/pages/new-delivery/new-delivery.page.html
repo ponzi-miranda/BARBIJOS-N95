@@ -1,7 +1,22 @@
-<div class="container">
+<div class="container search-container" *ngIf="!showForm && !showLastDeliveries">
   <div class="row">
     <div class="col-12">
-      <search-component (searchResult)="searchResult()"></search-component>
+      <search-component (searchResultEvent)="onSearchResult($event)"></search-component>
+    </div>
+  </div>
+</div>
+<div class="container form-container" *ngIf="showForm && !showLastDeliveries">
+  <div class="row">
+    <div class="col-12">
+      <new-delivery-form-component
+      ></new-delivery-form-component>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="!showForm && showLastDeliveries">
+  <div class="row">
+    <div class="col-12">
+      <deliveries-list-component></deliveries-list-component>
     </div>
   </div>
 </div>

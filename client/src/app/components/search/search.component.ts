@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PersonData } from 'src/app/models/person.model';
 import { DeliveriesService } from 'src/app/services/deliveries.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   deliveriesList:any = [];
   showList: boolean;
-  @Output() searchResult = new EventEmitter<any>();
+  @Output() searchResultEvent = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,17 +28,8 @@ export class SearchComponent implements OnInit {
   search() {
     const values = this.searchForm.value;
     this.deliveriesService.getListDeliveriesByDni(values.dni).subscribe(
-      (response) => {
-
-        // if (!response) {
-          
-        // }
-        console.log(response);
-        this.deliveriesList = response;
-      },
-      (error) => {
-        console.log(error);
-      }
+      (response: any) => { if (response) { return this.searchResultEvent.emit({ response }); }},
+      (error) => { console.log(error); }
     )
   }
 
