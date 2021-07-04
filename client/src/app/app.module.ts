@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DeliveriesListComponent } from './components/deliveries-list/deliveries-list.component';
 import { DeliveriesListPage } from './pages/deliveries-list/deliveries-list.page';
 import { NewDeliveryFormComponent } from './components/new-delivery-form/new-delivery-form.component';
+import { SuccessComponent } from './components/success/success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { NewDeliveryFormComponent } from './components/new-delivery-form/new-del
     MainPage,
     DeliveriesListComponent,
     DeliveriesListPage,
-    NewDeliveryFormComponent
+    NewDeliveryFormComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,
