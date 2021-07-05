@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PersonData } from 'src/app/models/person.model';
 import { DeliveriesService } from 'src/app/services/deliveries.service';
@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   deliveriesList:any = [];
   showList: boolean;
+  @Input() dniStromg: string;
   @Output() searchResultEvent = new EventEmitter();
 
   constructor(

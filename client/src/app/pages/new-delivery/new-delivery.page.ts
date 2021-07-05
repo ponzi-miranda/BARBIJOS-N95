@@ -10,6 +10,7 @@ import { DeliveriesService } from 'src/app/services/deliveries.service';
 export class NewDeliveryPage implements OnInit {
   showLastDeliveries: boolean;
   showForm: boolean;
+  showSuccess: boolean;
 
   constructor(
     private deliveriesService: DeliveriesService
@@ -26,6 +27,12 @@ export class NewDeliveryPage implements OnInit {
       } else {
         this.showForm = true;
       }
+    }
+  }
+
+  deliveryCreatedEvent(event) {
+    if (event.deliveryCreated) {
+      this.showSuccess = true;
     }
   }
 }

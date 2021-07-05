@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,6 +16,7 @@ export class NewDeliveryFormComponent implements OnInit {
   newDeliveryForm: FormGroup;
   services = [];
   roles = [];
+  @Output() successfulEvent = new EventEmitter();
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -56,15 +57,19 @@ export class NewDeliveryFormComponent implements OnInit {
   }
 
   public createDelivery() {
-    const values = this.newDeliveryForm.value;
-    this.deliveriesService.createDelivery(values).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-      (response) => { 
-        console.log(response);
-      },
-      (error) => { 
-        console.log(error); 
-      }
-    );
+    if (this.newDeliveryForm.valid) {
+      const values = this.newDeliveryForm.value;
+      this.deliveriesService.createDelivery(values).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
+        (response: any) => {
+          if (response.message === 'Successful') {
+            return this.successfulEvent.emit({ deliveryCreated: true });
+          } 
+        },
+        (error) => { 
+          console.log(error);
+        }
+      );  
+    }
   }
 
   ngOnDestroy() {
