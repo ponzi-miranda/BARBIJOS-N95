@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { DeliveriesService } from '../../services/deliveries.service';
-import { delivery } from 'src/app/models/delivery';
+import { Delivery } from 'src/app/models/delivery';
 
 
 @Component({
