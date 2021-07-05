@@ -12,8 +12,10 @@ export class DeliveriesService {
 
   constructor(private http: HttpClient) { }
 
-  getDeliveries(){
-    return this.http.get(`${this.API_URI_PROD}/api/deliveries`); 
+  getDeliveries(limit?: number){
+    const params = {};
+    if (limit) { params['limit'] = limit; }
+    return this.http.get(`${this.API_URI_PROD}/api/deliveries`, { params }); 
   }
 
   getListDeliveriesByDni(dni: string) {
