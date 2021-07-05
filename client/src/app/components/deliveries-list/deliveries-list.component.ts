@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { DeliveriesService } from '../../services/deliveries.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'deliveries-list-component',
@@ -7,15 +6,12 @@ import { DeliveriesService } from '../../services/deliveries.service';
   styleUrls: ['./deliveries-list.component.scss']
 })
 export class DeliveriesListComponent implements OnInit {
+  @Input() deliveries = [];
 
-  constructor(private deliveriesService : DeliveriesService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.deliveriesService.getDeliveries().subscribe(
-      res => console.log(res),
-      err => console.error(err)
-    );
+  ngOnInit() {
+    console.log(this.deliveries);
   }
-
 }
 
