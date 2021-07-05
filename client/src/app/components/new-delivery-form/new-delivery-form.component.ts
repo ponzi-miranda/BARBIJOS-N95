@@ -77,5 +77,11 @@ export class NewDeliveryFormComponent implements OnInit {
     this.ngUnsubscribe.complete();
   }
 
+  get name() { return this.newDeliveryForm.get('name'); }
+  get dni() { return this.newDeliveryForm.get('dni'); }
+  get idRol() { return this.newDeliveryForm.get('idRol'); }
+  get idService() { return this.newDeliveryForm.get('idService'); }
+  get deliveredDate() { return this.newDeliveryForm.get('deliveredDate'); }
+  get observations() { return this.newDeliveryForm.get('observations'); }
   get currentDateTime() { return new Date(); }
 }
