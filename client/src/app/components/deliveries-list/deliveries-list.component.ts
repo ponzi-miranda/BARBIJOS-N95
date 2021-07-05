@@ -10,8 +10,6 @@ export class DeliveriesListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.deliveries);
-  }
+  ngOnInit() { }
 }
 

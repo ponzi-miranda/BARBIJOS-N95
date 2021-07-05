@@ -8,9 +8,7 @@ import { DeliveriesService } from 'src/app/services/deliveries.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewDeliveryPage implements OnInit {
-  showLastDeliveries: boolean;
-  showForm: boolean;
-  showSuccess: boolean;
+  currentTab = 'search';
 
   constructor(
     private deliveriesService: DeliveriesService
@@ -23,16 +21,16 @@ export class NewDeliveryPage implements OnInit {
     if (event.response) {
       const response = event.response;
       if (response.isRegistered) {
-        this.showLastDeliveries = true;
+        this.currentTab = 'last-deliveries';
       } else {
-        this.showForm = true;
+        this.currentTab = 'form';
       }
     }
   }
 
   deliveryCreatedEvent(event) {
     if (event.deliveryCreated) {
-      this.showSuccess = true;
+      this.currentTab = 'success';
     }
   }
 }
