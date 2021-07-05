@@ -1,16 +1,16 @@
 div {
-    width: 100%;
-  }
-  .alert-success .btn-success {
-    float: right;
-  }
-  .alert-success span {
-    float: left;
-    line-height: 34px;
-  }
-  .alert-success > div:after {
-    clear: both;
-    content: '';
-    display: table;
-  }
+  width: 100%;
+}
+.alert-success .btn-success {
+  float: right;
+}
+.alert-success span {
+  float: left;
+  line-height: 34px;
+}
+.alert-success > div:after {
+  clear: both;
+  content: '';
+  display: table;
+}
   

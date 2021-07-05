@@ -1,28 +1,8 @@
-<div class="container search-container" *ngIf="!showForm && !showLastDeliveries && !showSuccess">
-  <div class="row">
-    <div class="col-12">
-      <search-component (searchResultEvent)="onSearchResult($event)"></search-component>
-    </div>
-  </div>
-</div>
-<div class="container form-container" *ngIf="showForm && !showLastDeliveries && !showSuccess">
-  <div class="row">
-    <div class="col-12">
-      <new-delivery-form-component (successfulEvent)="deliveryCreatedEvent($event)"></new-delivery-form-component>
-    </div>
-  </div>
-</div>
-<div class="container" *ngIf="!showForm && showLastDeliveries && !showSuccess">
-  <div class="row">
-    <div class="col-12">
-      <deliveries-list-component></deliveries-list-component>
-    </div>
-  </div>
-</div>
-<div class="container success-container" *ngIf="showSuccess">
-  <div class="row">
-    <div class="col-12">
-      <success-component></success-component>
-    </div>
+<div class="vertical-center">
+  <div class="container">
+    <search-component *ngIf="currentTab === 'search'" (searchResultEvent)="onSearchResult($event)"></search-component>
+    <new-delivery-form-component *ngIf="currentTab === 'form'" (successfulEvent)="deliveryCreatedEvent($event)"></new-delivery-form-component>
+    <deliveries-list-component *ngIf="currentTab === 'last-deliveries'"></deliveries-list-component>
+    <success-component *ngIf="currentTab === 'success'"></success-component>
   </div>
 </div>
