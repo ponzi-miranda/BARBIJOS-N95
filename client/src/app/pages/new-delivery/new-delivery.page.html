@@ -1,8 +1,10 @@
 <div class="vertical-center">
   <div class="container">
-    <search-component *ngIf="currentTab === 'search'" (searchResultEvent)="onSearchResult($event)"></search-component>
-    <new-delivery-form-component *ngIf="currentTab === 'form'" (successfulEvent)="deliveryCreatedEvent($event)"></new-delivery-form-component>
-    <deliveries-list-component *ngIf="currentTab === 'last-deliveries'"></deliveries-list-component>
-    <success-component *ngIf="currentTab === 'success'"></success-component>
+    <loading-component [loading]="loading"></loading-component>
+    <search-component *ngIf="!loading && currentTab === 'search'" (searchValueEvent)="searchAction($event)"></search-component>
+    <new-delivery-form-component *ngIf="!loading && currentTab === 'form'" [personData]="personInfo" (responseEvent)="createDeliveryAction($event)"></new-delivery-form-component>
+    <menu-component *ngIf="!loading && currentTab === 'last-deliveries'" [menuStyle]="'custom'" (changeTabEvent)="onChangeTab($event)"></menu-component>
+    <deliveries-list-component *ngIf="!loading && currentTab === 'last-deliveries'" [deliveries]="lastDeliveriesList"></deliveries-list-component>
+    <success-component *ngIf="!loading && currentTab === 'success'"></success-component>
   </div>
 </div>
