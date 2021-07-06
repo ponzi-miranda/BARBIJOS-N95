@@ -7,12 +7,14 @@
           <label class="col-4 col-form-label" for="name">Nombre:</label> 
           <div class="col-8">
             <input id="name" name="name" placeholder="Nombre" type="text" class="form-control" formControlName="name" required>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">Introduzca su nombre completo</div>
           </div>
         </div>
         <div class="form-group row">
           <label for="dni" class="col-4 col-form-label">DNI:</label> 
           <div class="col-8">
             <input id="dni" name="dni" placeholder="Dni" type="text" class="form-control" formControlName="dni" required>
+            <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">Introduzca su DNI</div>
           </div>
         </div>
         <div class="form-group row">
@@ -22,6 +24,7 @@
               <option value="">Seleccione un rol</option>
               <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
             </select>
+            <div *ngIf="idRol.invalid && (idRol.dirty || idRol.touched)" class="alert alert-danger">Seleccione su rol</div>
           </div>
         </div>
         <div class="form-group row">
@@ -31,12 +34,14 @@
               <option value="">Seleccione un servicio</option>
               <option *ngFor="let service of services" [value]="service.id">{{ service.nombre }}</option>
             </select>
+            <div *ngIf="idService.invalid && (idService.dirty || idService.touched)" class="alert alert-danger">Seleccione Servicio</div>
           </div>
         </div>
         <div class="form-group row">
           <label for="delivery_date" class="col-4 col-form-label">Fecha de Entrega:</label> 
           <div class="col-8">
             <input class="form-control" formControlName="deliveredDate" type="date" id="date-id" required />
+            <div *ngIf="deliveredDate.invalid && (deliveredDate.dirty || deliveredDate.touched)" class="alert alert-danger">Indique fecha de retiro</div>
           </div>
         </div>
         <div class="form-group row">
