@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit {
   deliveriesList:any = [];
   showList: boolean;
   @Input() dniStromg: string;
-  @Output() searchResultEvent = new EventEmitter();
+  @Output() searchValueEvent = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,10 +28,7 @@ export class SearchComponent implements OnInit {
 
   search() {
     const values = this.searchForm.value;
-    this.deliveriesService.getListDeliveriesByDni(values.dni).subscribe(
-      (response: any) => { if (response) { return this.searchResultEvent.emit({ response }); }},
-      (error) => { console.log(error); }
-    )
+    return this.searchValueEvent.emit({ dni: values.dni });
   }
 
   get dni() { return this.searchForm.get('dni'); }
