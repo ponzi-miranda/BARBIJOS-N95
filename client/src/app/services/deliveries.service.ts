@@ -18,9 +18,8 @@ export class DeliveriesService {
     return this.http.get(`${this.API_URI_STAGE}/api/deliveries`, { params }); 
   }
 
-  getListDeliveriesByDni(dni: string) {
-    const params = { dni: dni };
-    return this.http.get(`${this.API_URI_STAGE}/api/deliveries/search`, { params });
+  getListDeliveriesByDni(dni: string, limit: string = '5') {
+    return this.http.get(`${this.API_URI_STAGE}/api/deliveries/search`, { params: { dni, limit } });
   }
 
   deleteDelivey(id: string){

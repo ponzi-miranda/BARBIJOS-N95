@@ -8,6 +8,7 @@ import { DeliveriesService } from '../../services/deliveries.service';
 })
 export class DeliveriesListPage implements OnInit {
   deliveries: any = [];
+  loading = false;
   constructor(private deliveriesService : DeliveriesService) { }
 
   ngOnInit(): void {
@@ -15,15 +16,19 @@ export class DeliveriesListPage implements OnInit {
   }
 
   getDeliveries(){
+    this.loading = true;
     this.deliveriesService.getDeliveries().subscribe(
       (response: any) => {
         if (response.data) {
           this.deliveries = response.data;
+          this.loading = false;
         }
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error);
+        this.loading = false;
+      }
     );
   }
-
 }
 

@@ -15,6 +15,9 @@ import { DeliveriesListComponent } from './components/deliveries-list/deliveries
 import { DeliveriesListPage } from './pages/deliveries-list/deliveries-list.page';
 import { NewDeliveryFormComponent } from './components/new-delivery-form/new-delivery-form.component';
 import { SuccessComponent } from './components/success/success.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoadingComponent } from './components/loading/loading.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,14 +29,17 @@ import { SuccessComponent } from './components/success/success.component';
     DeliveriesListComponent,
     DeliveriesListPage,
     NewDeliveryFormComponent,
-    SuccessComponent
+    SuccessComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   providers: [DeliveriesService],
   bootstrap: [AppComponent]
