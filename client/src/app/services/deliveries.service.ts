@@ -15,27 +15,26 @@ export class DeliveriesService {
   getDeliveries(limit?: number){
     const params = {};
     if (limit) { params['limit'] = limit; }
-    return this.http.get(`${this.API_URI_PROD}/api/deliveries`, { params }); 
+    return this.http.get(`${this.API_URI_STAGE}/api/deliveries`, { params }); 
   }
 
-  getListDeliveriesByDni(dni: string) {
-    const params = { dni: dni };
-    return this.http.get(`${this.API_URI_PROD}/api/deliveries/search`, { params });
+  getListDeliveriesByDni(dni: string, limit: string = '5') {
+    return this.http.get(`${this.API_URI_STAGE}/api/deliveries/search`, { params: { dni, limit } });
   }
 
   deleteDelivey(id: string){
-    return this.http.delete(`${this.API_URI_PROD}/api/deliveries/?id=${id}`); 
+    return this.http.delete(`${this.API_URI_STAGE}/api/deliveries/?id=${id}`); 
   }
 
   createDelivery(delivery : Delivery){
-    return this.http.post(`${this.API_URI_PROD}/api/deliveries`, delivery); 
+    return this.http.post(`${this.API_URI_STAGE}/api/deliveries`, delivery); 
   }
 
   getServices(): Observable<any> {
-    return this.http.get(`${this.API_URI_PROD}/api/deliveries/services`);
+    return this.http.get(`${this.API_URI_STAGE}/api/deliveries/services`);
   }
 
   getRoles(): Observable<any> {
-    return this.http.get(`${this.API_URI_PROD}/api/deliveries/roles`);
+    return this.http.get(`${this.API_URI_STAGE}/api/deliveries/roles`);
   }
 }
