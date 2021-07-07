@@ -2,7 +2,7 @@
   <div class="container">
     <loading-component [loading]="loading"></loading-component>
     <search-component *ngIf="!loading && currentTab === 'search'" (searchValueEvent)="searchAction($event)"></search-component>
-    <new-delivery-form-component *ngIf="!loading && currentTab === 'form'" [personData]="personInfo" (responseEvent)="createDeliveryAction($event)"></new-delivery-form-component>
+    <new-delivery-form-component *ngIf="!loading && currentTab === 'form'" [personData]="personInfo" [dniValue]="dniValue" (responseEvent)="createDeliveryAction($event)"></new-delivery-form-component>
     <menu-component *ngIf="!loading && currentTab === 'last-deliveries'" [menuStyle]="'custom'" (changeTabEvent)="onChangeTab($event)"></menu-component>
     <deliveries-list-component *ngIf="!loading && currentTab === 'last-deliveries'" [deliveries]="lastDeliveriesList"></deliveries-list-component>
     <success-component *ngIf="!loading && currentTab === 'success'"></success-component>

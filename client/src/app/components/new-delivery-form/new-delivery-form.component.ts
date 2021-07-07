@@ -12,7 +12,7 @@ import { DeliveriesService } from 'src/app/services/deliveries.service';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class NewDeliveryFormComponent implements OnInit {
-  @Input() dniValue: string = '';
+  @Input() dniValue;
   @Input() personData: any = {};
   newDeliveryForm: FormGroup;
   services = [];
@@ -28,6 +28,7 @@ export class NewDeliveryFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.dniValue);
     this.setServices();
     this.setRoles();
     this.createForm();
@@ -36,7 +37,7 @@ export class NewDeliveryFormComponent implements OnInit {
   private createForm() {
     this.newDeliveryForm = this.formBuilder.group({
       name: new FormControl({ value: this.personData ? this.personData.nombre : '', disabled: this.checkDisableFields() }, [Validators.required]),
-      dni: new FormControl({ value: this.personData ? this.personData.dni : this.dniValue, disabled: false }, [Validators.required]),
+      dni: new FormControl({ value: this.personData.dni ? this.personData.dni : this.dniValue, disabled: false }, [Validators.required]),
       idRol: new FormControl({ value: this.personData ? this.personData.idRol : '', disabled: this.checkDisableFields() }, [Validators.required]),
       idService: new FormControl('', [Validators.required]),
       deliveredDate: new FormControl('', [Validators.required]),
