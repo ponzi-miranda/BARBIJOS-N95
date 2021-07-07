@@ -36,7 +36,7 @@ export class NewDeliveryFormComponent implements OnInit {
   private createForm() {
     this.newDeliveryForm = this.formBuilder.group({
       name: new FormControl({ value: this.personData ? this.personData.nombre : '', disabled: this.checkDisableFields() }, [Validators.required]),
-      dni: new FormControl({ value: this.personData ? this.personData.dni : this.dniValue, disabled: false }, [Validators.required]),
+      dni: new FormControl({ value: this.personData.dni ? this.personData.dni : this.dniValue, disabled: false }, [Validators.required]),
       idRol: new FormControl({ value: this.personData ? this.personData.idRol : '', disabled: this.checkDisableFields() }, [Validators.required]),
       idService: new FormControl('', [Validators.required]),
       deliveredDate: new FormControl('', [Validators.required]),
