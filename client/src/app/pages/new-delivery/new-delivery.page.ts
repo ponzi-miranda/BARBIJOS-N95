@@ -14,6 +14,8 @@ export class NewDeliveryPage implements OnInit {
   loading: boolean;
   lastDeliveriesList = [];
   personInfo = {};
+  dniValue: string;
+
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -34,6 +36,7 @@ export class NewDeliveryPage implements OnInit {
               this.personInfo = response.personData[0];
               this.currentTab = 'last-deliveries';
             } else {
+              this.dniValue = event.dni;
               this.currentTab = 'form';
             }
             this.loading = false;
@@ -43,7 +46,7 @@ export class NewDeliveryPage implements OnInit {
           this.loading = false;
           console.log(error); 
         }
-      )    
+      )
     }
   }
 
@@ -61,7 +64,7 @@ export class NewDeliveryPage implements OnInit {
           this.loading = false;
           console.log(error);
         }
-      );  
+      );
     }
   }
 

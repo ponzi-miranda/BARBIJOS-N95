@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PersonData } from 'src/app/models/person.model';
-import { DeliveriesService } from 'src/app/services/deliveries.service';
-
 @Component({
   selector: 'search-component',
   templateUrl: './search.component.html',
@@ -16,14 +13,21 @@ export class SearchComponent implements OnInit {
   @Output() searchValueEvent = new EventEmitter();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private deliveriesService: DeliveriesService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
       dni: new FormControl('', [Validators.required])
     });
+  }
+
+  onCheckInputValidation(event) {
+    const numberPattern = new RegExp('^[0-9\~]*$');
+    const input = String.fromCharCode(event.charCode);
+    if (!numberPattern.test(input)) {
+      event.preventDefault();
+    }
   }
 
   search() {

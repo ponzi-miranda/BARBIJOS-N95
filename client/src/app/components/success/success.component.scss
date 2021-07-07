@@ -2,11 +2,8 @@ div {
   width: 100%;
 }
 .alert-success .btn-success {
-  float: right;
-}
-.alert-success span {
-  float: left;
-  line-height: 34px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .alert-success > div:after {
   clear: both;

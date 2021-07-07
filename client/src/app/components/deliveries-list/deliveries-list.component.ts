@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./deliveries-list.component.scss']
 })
 export class DeliveriesListComponent implements OnInit {
+  @Input() listStyle: string = 'default';
   @Input() deliveries = [];
 
   constructor() { }
