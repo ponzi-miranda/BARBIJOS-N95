@@ -12,7 +12,7 @@ import { DeliveriesService } from 'src/app/services/deliveries.service';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class NewDeliveryFormComponent implements OnInit {
-  @Input() dniValue: string = '';
+  @Input() dniValue;
   @Input() personData: any = {};
   newDeliveryForm: FormGroup;
   services = [];
@@ -28,6 +28,7 @@ export class NewDeliveryFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.dniValue);
     this.setServices();
     this.setRoles();
     this.createForm();
