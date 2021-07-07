@@ -46,7 +46,7 @@ export class NewDeliveryPage implements OnInit {
           this.loading = false;
           console.log(error); 
         }
-      )    
+      )
     }
   }
 
@@ -64,7 +64,7 @@ export class NewDeliveryPage implements OnInit {
           this.loading = false;
           console.log(error);
         }
-      );  
+      );
     }
   }
 
