@@ -1,4 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DeliveriesService } from '../../services/deliveries.service';
 
 @Component({
@@ -9,6 +11,7 @@ import { DeliveriesService } from '../../services/deliveries.service';
 export class DeliveriesListPage implements OnInit {
   deliveries: any = [];
   loading = false;
+  private ngUnsubscribe = new Subject();
   constructor(private deliveriesService : DeliveriesService) { }
 
   ngOnInit(): void {
@@ -17,7 +20,7 @@ export class DeliveriesListPage implements OnInit {
 
   getDeliveries(){
     this.loading = true;
-    this.deliveriesService.getDeliveries().subscribe(
+    this.deliveriesService.getDeliveries().pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       (response: any) => {
         if (response.data) {
           this.deliveries = response.data;
@@ -29,6 +32,11 @@ export class DeliveriesListPage implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
 
