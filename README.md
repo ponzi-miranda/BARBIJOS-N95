@@ -7,5 +7,6 @@ Pasos para lanzar
 
 Pasos para deployar
 
-1. Logearse con - firebase login -
-2. En la terminal  - firebase deploy -
+1. Primero... Buildear la app con npm run build
+2. Logearse con - firebase login -
+3. En la terminal  - firebase deploy -
