@@ -4,6 +4,7 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">NOMBRE</th>
+      <th scope="col">DNI</th>
       <th scope="col">SERVICIO</th>
       <th scope="col">FECHA ENTREGA</th>
     </tr>
@@ -12,6 +13,7 @@
     <tr *ngFor="let delivery of deliveries">
       <td>{{ delivery.id }}</td>
       <td>{{ delivery.nombre }}</td>
+      <td>{{ delivery.dni }}</td>
       <td>{{ delivery.servicio }}</td>
       <td>{{ delivery.fechaRetiro }}</td>
     </tr>
