@@ -28,7 +28,6 @@ export class NewDeliveryFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.dniValue);
     this.setServices();
     this.setRoles();
     this.createForm();
@@ -37,11 +36,11 @@ export class NewDeliveryFormComponent implements OnInit {
   private createForm() {
     this.newDeliveryForm = this.formBuilder.group({
       name: new FormControl({ value: this.personData ? this.personData.nombre : '', disabled: this.checkDisableFields() }, [Validators.required]),
-      dni: new FormControl({ value: this.personData.dni ? this.personData.dni : this.dniValue, disabled: false }, [Validators.required]),
+      dni: new FormControl({ value: this.personData.dni ? this.personData.dni : this.dniValue, disabled: this.checkDisableFields() }, [Validators.required]),
       idRol: new FormControl({ value: this.personData ? this.personData.idRol : '', disabled: this.checkDisableFields() }, [Validators.required]),
       idService: new FormControl('', [Validators.required]),
       deliveredDate: new FormControl('', [Validators.required]),
-      observations: new FormControl('', [Validators.required]),
+      observations: new FormControl(''),
       createdAt: new FormControl(this.currentDateTime.toISOString(), [Validators.required])
     });
   }
@@ -67,6 +66,9 @@ export class NewDeliveryFormComponent implements OnInit {
   public createDelivery() {
     if (this.newDeliveryForm.valid) {
       const values = this.newDeliveryForm.value;
+      if (this.personData && this.personData.dni) {
+        values.dni = this.personData.dni;  
+      }
       return this.responseEvent.emit({ formValues: values });
     }
   }
