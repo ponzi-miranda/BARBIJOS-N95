@@ -15,6 +15,7 @@ import { DeliveriesListComponent } from './components/deliveries-list/deliveries
 import { DeliveriesListPage } from './pages/deliveries-list/deliveries-list.page';
 import { NewDeliveryFormComponent } from './components/new-delivery-form/new-delivery-form.component';
 import { SuccessComponent } from './components/success/success.component';
+import { ErrorComponent } from './components/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { SuccessComponent } from './components/success/success.component';
     DeliveriesListComponent,
     DeliveriesListPage,
     NewDeliveryFormComponent,
-    SuccessComponent
+    SuccessComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
