@@ -1,0 +1,16 @@
+div {
+    width: 100%;
+  }
+  .alert-danger .btn-success {
+    float: right;
+  }
+  .alert-danger span {
+    float: left;
+    line-height: 34px;
+  }
+  .alert-danger > div:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+    
