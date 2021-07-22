@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <deliveries-list-component [deliveries]="deliveries"></deliveries-list-component>
+      <loading-component [loading]="loading"></loading-component>
+      <deliveries-list-component *ngIf="!loading" [deliveries]="deliveries"></deliveries-list-component>
     </div>
   </div>
 </div>

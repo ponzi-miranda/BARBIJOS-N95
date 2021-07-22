@@ -9,14 +9,17 @@ import { DeliveriesService } from 'src/app/services/deliveries.service';
   selector: 'new-delivery-form-component',
   templateUrl: './new-delivery-form.component.html',
   styleUrls: ['./new-delivery-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class NewDeliveryFormComponent implements OnInit {
-  @Input() personData: PersonData;
+  @Input() dniValue;
+  @Input() personData: any = {};
   newDeliveryForm: FormGroup;
   services = [];
   roles = [];
-  @Output() successfulEvent = new EventEmitter();
+  loading: boolean = true;
+
+  @Output() responseEvent = new EventEmitter();
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -25,6 +28,7 @@ export class NewDeliveryFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.dniValue);
     this.setServices();
     this.setRoles();
     this.createForm();
@@ -32,9 +36,9 @@ export class NewDeliveryFormComponent implements OnInit {
 
   private createForm() {
     this.newDeliveryForm = this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      dni: new FormControl('', [Validators.required]),
-      idRol: new FormControl('', [Validators.required]),
+      name: new FormControl({ value: this.personData ? this.personData.nombre : '', disabled: this.checkDisableFields() }, [Validators.required]),
+      dni: new FormControl({ value: this.personData.dni ? this.personData.dni : this.dniValue, disabled: false }, [Validators.required]),
+      idRol: new FormControl({ value: this.personData ? this.personData.idRol : '', disabled: this.checkDisableFields() }, [Validators.required]),
       idService: new FormControl('', [Validators.required]),
       deliveredDate: new FormControl('', [Validators.required]),
       observations: new FormControl('', [Validators.required]),
@@ -42,10 +46,14 @@ export class NewDeliveryFormComponent implements OnInit {
     });
   }
 
+  private checkDisableFields() {
+    return this.personData.dni ? true : false;
+  }
+
   private setServices() {
     this.deliveriesService.getServices().pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-      (services) => { this.services = services.data; },
-      (error) => { console.log(error); }
+      (services) => { this.services = services.data; this.loading = false; },
+      (error) => { console.log(error); this.loading = false; }
     );
   } 
   
@@ -59,16 +67,7 @@ export class NewDeliveryFormComponent implements OnInit {
   public createDelivery() {
     if (this.newDeliveryForm.valid) {
       const values = this.newDeliveryForm.value;
-      this.deliveriesService.createDelivery(values).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-        (response: any) => {
-          if (response.message === 'Successful') {
-            return this.successfulEvent.emit({ deliveryCreated: true });
-          } 
-        },
-        (error) => { 
-          console.log(error);
-        }
-      );  
+      return this.responseEvent.emit({ formValues: values });
     }
   }
 

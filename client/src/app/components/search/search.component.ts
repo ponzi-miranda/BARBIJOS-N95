@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PersonData } from 'src/app/models/person.model';
-import { DeliveriesService } from 'src/app/services/deliveries.service';
-
 @Component({
   selector: 'search-component',
   templateUrl: './search.component.html',
@@ -13,11 +10,10 @@ export class SearchComponent implements OnInit {
   deliveriesList:any = [];
   showList: boolean;
   @Input() dniStromg: string;
-  @Output() searchResultEvent = new EventEmitter();
+  @Output() searchValueEvent = new EventEmitter();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private deliveriesService: DeliveriesService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -26,12 +22,17 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  onCheckInputValidation(event) {
+    const numberPattern = new RegExp('^[0-9\~]*$');
+    const input = String.fromCharCode(event.charCode);
+    if (!numberPattern.test(input)) {
+      event.preventDefault();
+    }
+  }
+
   search() {
     const values = this.searchForm.value;
-    this.deliveriesService.getListDeliveriesByDni(values.dni).subscribe(
-      (response: any) => { if (response) { return this.searchResultEvent.emit({ response }); }},
-      (error) => { console.log(error); }
-    )
+    return this.searchValueEvent.emit({ dni: values.dni });
   }
 
   get dni() { return this.searchForm.get('dni'); }

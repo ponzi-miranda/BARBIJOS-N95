@@ -1,5 +1,3 @@
-import { Time } from "@angular/common";
-
 export class PersonData {
   name: string;
   dni: string;
